@@ -25,30 +25,48 @@
                 <li class='item'>This is my item</li>
                 <li class='item'>This is my item</li>
                 <li class='item'>This is my item</li>
-                <li class='item'>This is my item</li>
-                <li class='item'>This is my item</li>
-                <li class='item'>This is my item</li>
             </ul>
         
         </main>
         <footer></footer>
         <script>
+            var numbers = [1, 2, 3, 4, 5, 6, 7, 8];
             // binding the numbers data as the text of the UL 
-/*           var numbers = [1, 2, 3, 4, 5, 6, 7, 8];
+/*          
             d3.selectAll('.item')
                 .data(numbers)
                 .text(function (d) {
                     return 'I am number ' + d;
             });
 */
+/*
             // adding some kind of style to the function return
-            var numbers = [1, 2, 3, 4, 5, 6, 7, 8];
             d3.selectAll('.item')
                 .data(numbers)
                 .style('font-size', function(d) {
                     return d+'em';
                 });
-
+*/
+            // what happens when there is more data than prescribed html elements
+            // doing something with the left over data 'numbers'
+/*            d3.select('body').selectAll('li')
+                .data(numbers)
+                .enter().append('li')
+                .text(function(d) {
+                    return 'I am number ' + d;
+                });
+*/
+            // doing it correct with enter and exit
+            var li = d3.select('body').selectAll('li')
+                .data(numbers)
+                .text(function(d) {
+                    return 'I am number ' + d;
+                });
+            li.enter().append('li')
+                .text(function(d) {
+                    return 'I am number ' + d;
+                });
+            li.exit().remove();
         </script>
     </body>
 </html>
