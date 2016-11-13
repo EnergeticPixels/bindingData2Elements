@@ -9,7 +9,7 @@
         <title>D3 Binding Data</title>
         <meta name="description" content="demonstration of binding data to D3 elements">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src='js/d3.v4-3.js'></script
+        <script src='js/d3.v3-5-17.js'></script
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -18,55 +18,45 @@
         <header></header>
         <main class='container'>
 
-            <h1>My Items</h1>
-            <ul id'items'>
-                <li class='item'>This is my item</li>
-                <li class='item'>This is my item</li>
-                <li class='item'>This is my item</li>
-                <li class='item'>This is my item</li>
-                <li class='item'>This is my item</li>
+            <h1>Top Exercise Methods</h1>
+            <ul id='items'>
+                <li class='item'>Running</li>
+                <li class='item'>Elliptical</li>
+                <li class='item'>Bike</li>
+                <li class='item'>Free Weights</li>
+                <li class='item'>Weighted Machines</li>
             </ul>
         
         </main>
         <footer></footer>
         <script>
-            var numbers = [1, 2, 3, 4, 5, 6, 7, 8];
-            // binding the numbers data as the text of the UL 
-/*          
-            d3.selectAll('.item')
-                .data(numbers)
-                .text(function (d) {
-                    return 'I am number ' + d;
-            });
-*/
+            // assigning just one color to ALL elements
+            var styles = ['red', 'blue', 'green', 'yellow', 'purple'];
 /*
-            // adding some kind of style to the function return
             d3.selectAll('.item')
-                .data(numbers)
-                .style('font-size', function(d) {
-                    return d+'em';
+                .data(styles)
+                .style('background', styles[2]);
+*/
+            // dynamically assigning a different color to each li
+/*
+            d3.selectAll('.item')
+                .data(styles)
+                .style('background', function(d) {
+                    return d;
                 });
 */
-            // what happens when there is more data than prescribed html elements
-            // doing something with the left over data 'numbers'
-/*            d3.select('body').selectAll('li')
-                .data(numbers)
-                .enter().append('li')
-                .text(function(d) {
-                    return 'I am number ' + d;
+            // passing in an object
+            d3.selectAll('.item')
+                .data(styles)
+                .style({
+                    'font-size': '1.5em',
+                    'padding': '0.4em',
+                    'margin': '0.5em',
+                    'list-style': 'none',
+                    'background': function(d) {
+                        return d;
+                    }
                 });
-*/
-            // doing it correct with enter and exit
-            var li = d3.select('body').selectAll('li')
-                .data(numbers)
-                .text(function(d) {
-                    return 'I am number ' + d;
-                });
-            li.enter().append('li')
-                .text(function(d) {
-                    return 'I am number ' + d;
-                });
-            li.exit().remove();
         </script>
     </body>
 </html>
